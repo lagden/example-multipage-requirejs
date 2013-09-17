@@ -1,9 +1,12 @@
-module.exports = function(grunt) {
-    "use strict";
+"use strict";
 
-    var base        = 'js',
-        pathBuilt   = base + '/built',
+var optsRequire = require('./options');
+
+module.exports = function(grunt) {
+    var base        = 'dev/js',
+        deploy      = 'deploy',
         pathLib     = base + '/lib',
+        pathBuilt   = base + '/built',
         uglifyMap   = [
             pathLib + '/require.js',
             pathLib + '/jquery.js',
@@ -29,7 +32,7 @@ module.exports = function(grunt) {
         },
         clean: {
             app: {
-                src: [pathBuilt, pathLib]
+                src: [pathBuilt, pathLib, deploy]
             }
         },
         copy: {
@@ -64,22 +67,6 @@ module.exports = function(grunt) {
                 }]
             }
         },
-        uglify: {
-            app: {
-                options: {
-                    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
-                    properties: true,
-                    preserveComments: false,
-                    compress: {
-                        global_defs: {
-                            "DEBUG": false
-                        },
-                        dead_code: true
-                    }
-                },
-                files: uglifyFiles
-            }
-        },
         watch: {
             compass: {
                 files: ['**/*.scss'],
@@ -94,6 +81,11 @@ module.exports = function(grunt) {
                 },
                 files: ['css/**/*'],
             }
+        },
+        requirejs: {
+            compile: {
+                options: optsRequire
+            }
         }
     });
 
@@ -103,7 +95,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-    // grunt.registerTask('default', ['compass', 'clean', 'copy', 'uglify']);
-    grunt.registerTask('default', ['clean', 'copy', 'uglify']);
+    grunt.registerTask('default', ['clean', 'copy']);
+    grunt.registerTask('require', ['default', 'requirejs']);
 };

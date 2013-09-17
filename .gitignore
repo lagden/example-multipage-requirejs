@@ -1,6 +1,7 @@
 .sass-cache
 node_modules
 bower_components
+deploy/*
 
 # Others
 cgi-bin
