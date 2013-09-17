@@ -29,7 +29,7 @@ function urlPath() {
 }
 
 require.config({
-    baseUrl: './js',
+    baseUrl: 'js',
     paths: {
         "jquery": "lib/jquery",
         "mustache": "lib/mustache",

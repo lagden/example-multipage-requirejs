@@ -23,13 +23,6 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        compass: {
-            app: {
-                options: {
-                    config: 'config.rb'
-                }
-            }
-        },
         clean: {
             app: {
                 src: [pathBuilt, pathLib, deploy]
@@ -67,21 +60,6 @@ module.exports = function(grunt) {
                 }]
             }
         },
-        watch: {
-            compass: {
-                files: ['**/*.scss'],
-                tasks: ['compass'],
-                options: {
-                    spawn: false
-                }
-            },
-            livereload: {
-                options: {
-                    livereload: true
-                },
-                files: ['css/**/*'],
-            }
-        },
         requirejs: {
             compile: {
                 options: optsRequire
@@ -89,14 +67,10 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-livereload');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     grunt.registerTask('default', ['clean', 'copy']);
-    grunt.registerTask('require', ['default', 'requirejs']);
+    grunt.registerTask('deploy', ['default', 'requirejs']);
 };
