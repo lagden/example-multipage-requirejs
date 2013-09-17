@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style type="text/css">
+        .cf:before,
+        .cf:after {
+            content: " ";
+            display: table;
+        }
+
+        .cf:after {
+            clear: both;
+        }
+
+        .cf {
+            *zoom: 1;
+        }
+        ul{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            margin-left: 0;
+        }
+        ul > li{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main role="main">
+        <header>
+            <h1>Awesome Test</h1>
+            <p>This is an awesome test!!</p>
+        </header>
+        <article>
+            <h2>User list</h2>
+            <ul id="userList"></ul>
+        </article>
+        <button id="add">Add user</button>
+    </main>
+    <script src="js/lib/require.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        require(['./js/config'], function () {
+            require(['app/main']);
+        });
+    </script>
+</body>
+</html>
