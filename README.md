@@ -1,7 +1,7 @@
 Example Require.js Multi-page
 =============================
 
-This is the example source using Require.js Multi-page Shimmed Site.
+The source code of an example using Requirejs Multi-page.
 
 ## Requeriments
 
