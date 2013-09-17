@@ -1,35 +1,34 @@
 "use strict";
 
-define(['jquery', 'mustache', 'text!app/views/user.html'], function($, Mustache, user) {
-    
-    var $add      = $('#add'),
+define(['jquery', 'mustache', 'app/prototype/user', 'text!app/views/list.html'], function($, Mustache, User, template) {
+
+    var $add = $('#add'),
         $userList = $('#userList');
 
-    $add.on('click.add', getUser);
+    var user = new User(null, userCallback);
 
-    function getUser() {
-        $.ajax({
-            url: 'http://randomuser.me/g/',
-            data: {
-                "seed": Math.random()
-            },
-            success: function(res) {
-                if (res.results.length > 0) {
-                    res.results[0].user.name.title = ucFirst(res.results[0].user.name.title);
-                    res.results[0].user.name.fullname = fullname(res.results[0].user.name);
-                    $userList.append(
-                        Mustache.render(user, res.results[0].user)
-                    );
-                }
-            }
-        });
+    $add.on('click.add', function(e) {
+        user.getUser();
+    });
+
+    $userList.on('click.detail', '> li > div > div > .detail:button', showDetail);
+
+    // Generate some users
+    for (var i = 10; i >= 0; i--) {
+        user.getUser();
+    };
+
+    function userCallback(res) {
+        if (res.results.length > 0) {
+            res.results[0].user.seed = res.results[0].seed;
+            $userList.append(
+                Mustache.render(template, res.results[0].user)
+            );
+        }
     }
 
-    function ucFirst(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-    function fullname(obj) {
-        return ucFirst(obj.first) + ' ' + ucFirst(obj.last);
+    function showDetail(e) {
+        var seed = this.getAttribute('data-seed');
+        if (seed) window.location = 'show.html?seed=' + seed
     }
 });

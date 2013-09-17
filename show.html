@@ -9,19 +9,16 @@
 <body>
     <main role="main">
         <header>
-            <h1>Awesome Test</h1>
-            <p>This is an awesome test!!</p>
+            <h1>Awesome Test - Show</h1>
+            <p>This is an awesome show test!!</p>
         </header>
-        <article>
-            <h2>User list</h2>
-            <ul id="userList" class="nav inline"></ul>
-        </article>
-        <button id="add">Add user</button>
+        <article id="userDetail"></article>
+        <button id="volta">Back to list</button>
     </main>
     <script src="js/lib/require.js" type="text/javascript"></script>
     <script type="text/javascript">
         require(['js/config'], function () {
-            require(['app/main']);
+            require(['app/show']);
         });
     </script>
 </body>

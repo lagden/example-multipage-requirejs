@@ -1,0 +1,12 @@
+<h2>{{ name.title }} {{ name.fullname }}</h2>
+<div class="cf media">
+    <img src="{{ picture }}" alt="{{ name.fullname }}" width="300" height="300" class="img">
+    <div class="body">
+        <ul class="nav">
+            <li><b>Email:</b> <a href="mailto:{{ email }}">{{ email }}</a></li>
+            <li><b>Phone:</b> <a href="tel:{{ phone }}">{{ phone }}</a></li>
+            <li><b>Address:</b> {{ #ucFirstAll }}{{ location.street }}{{ /ucFirstAll }}</li>
+            <li><b>City:</b> {{ #ucFirstAll }}{{ location.city }}{{ /ucFirstAll }}</li>
+        </ul>
+    </div>
+</div>
