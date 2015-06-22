@@ -1,27 +1,30 @@
 {
-    "name": "awesome-test",
-    "description": "Awesome Test",
-    "keywords": [
-        "requirejs",
-        "test",
-        "awesome",
-        "lagden"
-    ],
-    "version": "0.0.1",
-    "author": {
-        "name": "Thiago Lagden"
-    },
-    "scripts": {
-        "install": "bower install && grunt"
-    },
-    "license": "BSD",
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-copy": "~0.4.1",
-        "grunt-contrib-clean": "~0.5.0",
-        "grunt-contrib-requirejs": "~0.4.1"
-    },
-    "dependencies": {
-        "mustache": "~0.7.2"
-    }
+  "name": "awesome-test",
+  "description": "Awesome Test",
+  "keywords": [
+    "requirejs",
+    "test",
+    "awesome",
+    "lagden"
+  ],
+  "version": "0.0.1",
+  "author": {
+    "name": "Thiago Lagden"
+  },
+  "scripts": {
+    "install": "bower install && grunt",
+    "start": "grunt && http-server dev -o -a127.0.0.1 -p8285",
+    "deploy": "grunt deploy && http-server deploy -o -a127.0.0.1 -p8286"
+  },
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "http-server": "^0.8.0"
+  },
+  "dependencies": {
+    "mustache": "~0.7.2"
+  }
 }

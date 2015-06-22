@@ -1,37 +1,35 @@
-(function(window) {
+/* global define, jQuery, console */
+'use strict';
 
-    "use strict";
-
-    var doc = window.document;
-
-    // Prototype User
-    // -------------------------
-
-    function User(seed, cb) {
-        this.seed = seed || null;
-        this.successCallback = cb || this.success;
-    }
-
-    User.prototype.getUser = function() {
-        $.ajax({
-            "url": "http://randomuser.me/g/",
-            "data": {
-                "seed": this.seed || Math.random()
-            },
-            "success": this.successCallback
-        });
-    };
-
-    User.prototype.success = function(res) {
-        console.log(res);
-    };
-
+(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return User;
-        });
+        define(['jquery'], factory);
     } else {
-        window.User = User;
+        root.User = factory(jQuery);
     }
+}(this, function ($) {
 
-})(window);
+  function User(seed, cb) {
+    this.seed = seed || null;
+    this.successCallback = cb || this.success;
+  }
+
+  User.prototype.getUser = function() {
+    var seed = this.seed || Math.random();
+    $.support.cors = true;
+    var rndUser = 'http://randomuser.me/g/';
+    return $.getJSON('http://cors.lagden.in/call', {
+      url: rndUser,
+      data: {
+        'seed': seed
+      }
+    });
+  };
+
+  User.prototype.success = function(res) {
+    console.log(res);
+  };
+
+  return User;
+
+}));

@@ -1,12 +1,10 @@
 Example Require.js Multi-page
 =============================
 
-The source code of an example using Requirejs Multi-page.
+Small example using Requirejs Multi-page.
 
 ## Requeriments
 
-- Node.js
-- NPM
 - Bower
 - Grunt
 
@@ -14,18 +12,24 @@ The source code of an example using Requirejs Multi-page.
 
 Init example.
 
-	npm install -g bower
-	npm install -g grunt-cli
-	git clone https://github.com/lagden/example-multipage-requirejs.git example
-	cd example
-	npm install -d
-	
+```
+git clone https://github.com/lagden/example-multipage-requirejs.git example
+cd example
+npm install -d
+```
+
+## Usage
+
+```
+npm start
+```
+
 ## Deploy
 
-Generate deploy.
+```
+npm run deploy
+```
 
-	grunt deploy
-	
 ## Contributors
 
-- [Thiago Lagden](https://twitter.com/thiagolagden)
+- [Thiago Lagden](https://github.com/lagden)
