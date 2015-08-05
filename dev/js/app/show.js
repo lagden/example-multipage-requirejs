@@ -1,4 +1,4 @@
-/* global define */
+/* global define, window */
 'use strict';
 
 define([
@@ -9,25 +9,25 @@ define([
   'text!app/views/404.html'
 ], function($, Mustache, User, template, error404) {
 
-  var $back = $('#volta'),
-    $userDetail = $('#userDetail'),
-    seed = window.getParameterByName('seed'),
-    user;
-
-  if (seed) {
-    user = new User(seed);
-    user.getUser().then(userCallback);
-  } else {
-    $userDetail.append(
-      Mustache.render(error404, {
-        '404': 'User not found!'
-      })
-    );
+  // Get Parameter from Querystring
+  function getParameterByName(name) {
+    name = name.replace(/[\[]/, '[').replace(/[\]]/, ']');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+      results = regex.exec(window.location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   }
 
-  $back.on('click.back', function() {
-    window.location = window.urlPath() + '/index.html';
-  });
+  // Retorna o o dir atual ex.: http://xxx.com/dir/awesome/index.html -> /dir/awesome
+  function urlPath() {
+    var path = String(window.location.pathname).split('/');
+    path.pop();
+    return path.join('/');
+  }
+
+  var $back = $('#volta'),
+    $userDetail = $('#userDetail'),
+    seed = getParameterByName('seed'),
+    user;
 
   function userCallback(res) {
     if (res.results.length > 0) {
@@ -54,4 +54,19 @@ define([
   function fullname(obj) {
     return ucFirst(obj.first) + ' ' + ucFirst(obj.last);
   }
+
+  if (seed) {
+    user = new User(seed);
+    user.getUser().then(userCallback);
+  } else {
+    $userDetail.append(
+      Mustache.render(error404, {
+        '404': 'User not found!'
+      })
+    );
+  }
+
+  $back.on('click.back', function() {
+    window.location = urlPath() + '/index.html';
+  });
 });
