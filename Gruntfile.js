@@ -5,23 +5,10 @@
 var optsRequire = require('./options');
 
 module.exports = function(grunt) {
-  var base = 'dev/js',
-    deploy = 'deploy',
-    pathLib = base + '/lib',
-    pathBuilt = base + '/built',
-    uglifyMap = [
-      pathLib + '/require.js',
-      pathLib + '/jquery.js',
-      pathLib + '/mustache.js',
-      pathLib + '/text.js'
-    ],
-    uglifyFiles = [];
-
-  for (var i = uglifyMap.length - 1; i >= 0; i--) {
-    var obj = {};
-    obj[uglifyMap[i]] = [uglifyMap[i]];
-    uglifyFiles.push(obj);
-  }
+  var base = 'dev/js';
+  var deploy = 'deploy';
+  var pathLib = base + '/lib';
+  var pathBuilt = base + '/built';
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -34,12 +21,6 @@ module.exports = function(grunt) {
       app: {
         files: [{
           expand: true,
-          cwd: 'bower_components/requirejs',
-          src: ['require.js'],
-          dest: pathLib,
-          filter: 'isFile'
-        }, {
-          expand: true,
           cwd: 'node_modules/mustache',
           src: ['mustache.js'],
           dest: pathLib,
@@ -47,19 +28,6 @@ module.exports = function(grunt) {
           rename: function(dest) {
             return dest + '/mustache.js';
           }
-        }, {
-          expand: true,
-          flatten: true,
-          cwd: 'bower_components/jquery',
-          src: ['dist/jquery.js'],
-          dest: pathLib,
-          filter: 'isFile'
-        }, {
-          expand: true,
-          cwd: 'bower_components/text',
-          src: ['text.js'],
-          dest: pathLib,
-          filter: 'isFile'
         }]
       }
     },

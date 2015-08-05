@@ -1,30 +1,19 @@
-/* global define */
+/* globals define, window */
+
 'use strict';
 
 define([
   'jquery',
   'mustache',
   'app/prototype/user',
-  'text!app/views/list.html'
+  'text!app/views/list.html',
+  'slick-carousel/slick/slick'
 ], function($, Mustache, User, template) {
 
     var $add = $('#add'),
       $userList = $('#userList');
 
     var user = new User(null);
-
-    $add.on('click.add', function() {
-      user
-        .getUser()
-        .then(userCallback);
-    });
-
-    $userList.on('click.detail', '> li > div > div > .detail:button', showDetail);
-
-    // Generate some users
-    for (var i = 10; i >= 0; i--) {
-      user.getUser().then(userCallback);
-    }
 
     function userCallback(res) {
       if (res && res.results.length > 0) {
@@ -42,4 +31,20 @@ define([
         window.location = 'show.html?seed=' + seed;
       }
     }
+
+    $add.on('click.add', function() {
+      user
+        .getUser()
+        .then(userCallback);
+    });
+
+    $userList.on('click.detail', '> li > div > div > .detail:button', showDetail);
+
+    // Generate some users
+    for (var i = 10; i >= 0; i--) {
+      user.getUser().then(userCallback);
+    }
+
+    // Slick
+    $('#superXXX').slick();
   });

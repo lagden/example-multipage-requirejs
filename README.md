@@ -15,7 +15,7 @@ Init example.
 ```
 git clone https://github.com/lagden/example-multipage-requirejs.git example
 cd example
-npm install -d
+npm i -d
 ```
 
 ## Usage

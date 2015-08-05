@@ -1,3 +1,11 @@
 {
-    "directory": "bower_components"
+  "directory": "dev/js/lib",
+  "color": true,
+  "analytics": false,
+  "timeout": 120000,
+  "registry": {
+    "search": [
+      "https://bower.herokuapp.com"
+    ]
+  }
 }
